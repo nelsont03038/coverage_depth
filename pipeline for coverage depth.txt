@@ -1,0 +1,124 @@
+########################################
+# Locate genomic intervals of interest #
+########################################
+
+#Use Pfizer V3 assembly
+/hpc/grid/ngsws/molmed/tomn/CHOK1_genome/pfizer_v3/V3.Scaffold_Corrected.fas.fill.fa
+
+#Make BLASTdb
+makeblastdb -in V3.Scaffold_Corrected.fas.fill.fa -dbtype nucl -parse_seqids
+
+#BLAST query sequences against Pfizer V3 genome
+blastn –db /hpc/grid/ngsws/molmed/tomn/CHOK1_genome/pfizer_v3/V3.Scaffold_Corrected.fas.fill.fa –query BLAST.input.fa –out BLAST.results.out
+
+#loci information and samtools range to use
+#for insertion sites, used site +- 1000 bp.  For housekeeping genes, used the entire gene locus
+locus	scaffold	position	from	to	samtools range
+10	scaffold1068	239816	238816	240816	scaffold1068:238816-240816
+11	scaffold504	2584847	2583847	2585847	scaffold504:2583847-2585847
+2	scaffold294	97635	96635	98635	scaffold294:96635-98635
+20	scaffold127	4728304	4727304	4729304	scaffold127:4727304-4729304
+3	scaffold135	1901372	1900372	1902372	scaffold135:1900372-1902372
+17	scaffold310	511170	510170	512170	scaffold310:510170-512170
+A5	scaffold289	913658	912658	914658	scaffold289:912658-914658
+A8	scaffold355	4466255	4465255	4467255	scaffold355:4465255-4467255
+B5	scaffold492	306396	305396	307396	scaffold492:305396-307396
+C2	scaffold184	7412757	7411757	7413757	scaffold184:7411757-7413757
+C5	C57346172	604	-396	1604	C57346172:-396-1604
+C10	scaffold507	4700	3700	5700	scaffold507:3700-5700
+D9	scaffold510	381042	380042	382042	scaffold510:380042-382042
+E8	scaffold33	5892221	5891221	5893221	scaffold33:5891221-5893221
+G8	scaffold261	6027045	6026045	6028045	scaffold261:6026045-6028045
+B11	scaffold144	2039248	2038248	2040248	scaffold144:2038248-2040248
+ActR5	scaffold43		4163259	4180556	scaffold43:4163259-4180556
+AnxA11	scaffold1088		747530	791790	scaffold1088:747530-791790
+Cog1	scaffold681		779228	790016	scaffold681:779228-790016
+Prpf8	scaffold1999		70244	72794	scaffold1999:70244-72794
+CL18	scaffold182		4470834	4471183	scaffold182:4470834-4471183
+CL19	scaffold1430		514586	514930	scaffold1430:514586-514930
+
+
+
+##############################################
+# Calculate depth over intervals of interest #
+##############################################
+
+#for insertion sites, used site +- 1000 bp.  For housekeeping genes, used the entire gene locus
+
+#cell line 352-C7
+
+samtools depth -r "scaffold1068:238816-240816" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/10.352-C7.txt
+samtools depth -r "scaffold504:2583847-2585847" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/11.352-C7.txt
+samtools depth -r "scaffold294:96635-98635" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/2.352-C7.txt 
+samtools depth -r "scaffold127:4727304-4729304" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/20.352-C7.txt
+samtools depth -r "scaffold135:1900372-1902372" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/3.352-C7.txt
+samtools depth -r "scaffold310:510170-512170" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/17.352-C7.txt
+samtools depth -r "scaffold289:912658-914658" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A5.352-C7.txt
+samtools depth -r "scaffold355:4465255-4467255" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A8.352-C7.txt
+samtools depth -r "scaffold492:305396-307396" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B5.352-C7.txt
+samtools depth -r "scaffold184:7411757-7413757" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C2.352-C7.txt
+samtools depth -r "scaffold507:3700-5700" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C10.352-C7.txt
+samtools depth -r "scaffold510:380042-382042" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/D9.352-C7.txt
+samtools depth -r "scaffold33:5891221-5893221" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/E8.352-C7.txt
+samtools depth -r "scaffold261:6026045-6028045" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/G8.352-C7.txt
+samtools depth -r "scaffold144:2038248-2040248" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B11.352-C7.txt
+samtools depth -r "scaffold43:4163259-4180556" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/ActR5.352-C7.txt
+samtools depth -r "scaffold1088:747530-791790" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/AnxA11.352-C7.txt
+samtools depth -r "scaffold681:779228-790016" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Cog1.352-C7.txt
+samtools depth -r "scaffold1999:70244-72794" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Prpf8.352-C7.txt
+samtools depth -r "scaffold182:4470834-4471183" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL18.352-C7.txt
+samtools depth -r "scaffold1430:514586-514930" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL19.352-C7.txt
+samtools depth -r "C57346172:396-1604" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/352-C7/result_alignment/352-C7.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C5.352-C7.txt
+
+
+#cell line 362-D6
+
+samtools depth -r "scaffold1068:238816-240816" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/10.362-D6.txt
+samtools depth -r "scaffold504:2583847-2585847" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/11.362-D6.txt
+samtools depth -r "scaffold294:96635-98635" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/2.362-D6.txt 
+samtools depth -r "scaffold127:4727304-4729304" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/20.362-D6.txt
+samtools depth -r "scaffold135:1900372-1902372" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/3.362-D6.txt
+samtools depth -r "scaffold310:510170-512170" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/17.362-D6.txt
+samtools depth -r "scaffold289:912658-914658" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A5.362-D6.txt
+samtools depth -r "scaffold355:4465255-4467255" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A8.362-D6.txt
+samtools depth -r "scaffold492:305396-307396" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B5.362-D6.txt
+samtools depth -r "scaffold184:7411757-7413757" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C2.362-D6.txt
+samtools depth -r "C57346172:396-1604" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C5.362-D6.txt
+samtools depth -r "scaffold507:3700-5700" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C10.362-D6.txt
+samtools depth -r "scaffold510:380042-382042" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/D9.362-D6.txt
+samtools depth -r "scaffold33:5891221-5893221" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/E8.362-D6.txt
+samtools depth -r "scaffold261:6026045-6028045" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/G8.362-D6.txt
+samtools depth -r "scaffold144:2038248-2040248" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B11.362-D6.txt
+samtools depth -r "scaffold43:4163259-4180556" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/ActR5.362-D6.txt
+samtools depth -r "scaffold1088:747530-791790" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/AnxA11.362-D6.txt
+samtools depth -r "scaffold681:779228-790016" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Cog1.362-D6.txt
+samtools depth -r "scaffold1999:70244-72794" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Prpf8.362-D6.txt
+samtools depth -r "scaffold182:4470834-4471183" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL18.362-D6.txt
+samtools depth -r "scaffold1430:514586-514930" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/362-D6/result_alignment/362-D6.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL19.362-D6.txt
+
+#cell line 376-H5
+
+samtools depth -r "scaffold1068:238816-240816" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/10.376-H5.txt
+samtools depth -r "scaffold504:2583847-2585847" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/11.376-H5.txt
+samtools depth -r "scaffold294:96635-98635" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/2.376-H5.txt 
+samtools depth -r "scaffold127:4727304-4729304" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/20.376-H5.txt
+samtools depth -r "scaffold135:1900372-1902372" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/3.376-H5.txt
+samtools depth -r "scaffold310:510170-512170" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/17.376-H5.txt
+samtools depth -r "scaffold289:912658-914658" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A5.376-H5.txt
+samtools depth -r "scaffold355:4465255-4467255" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/A8.376-H5.txt
+samtools depth -r "scaffold492:305396-307396" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B5.376-H5.txt
+samtools depth -r "scaffold184:7411757-7413757" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C2.376-H5.txt
+samtools depth -r "C57346172:396-1604" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C5.376-H5.txt
+samtools depth -r "scaffold507:3700-5700" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/C10.376-H5.txt
+samtools depth -r "scaffold510:380042-382042" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/D9.376-H5.txt
+samtools depth -r "scaffold33:5891221-5893221" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/E8.376-H5.txt
+samtools depth -r "scaffold261:6026045-6028045" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/G8.376-H5.txt
+samtools depth -r "scaffold144:2038248-2040248" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/B11.376-H5.txt
+samtools depth -r "scaffold43:4163259-4180556" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/ActR5.376-H5.txt
+samtools depth -r "scaffold1088:747530-791790" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/AnxA11.376-H5.txt
+samtools depth -r "scaffold681:779228-790016" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Cog1.376-H5.txt
+samtools depth -r "scaffold1999:70244-72794" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/Prpf8.376-H5.txt
+samtools depth -r "scaffold182:4470834-4471183" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL18.376-H5.txt
+samtools depth -r "scaffold1430:514586-514930" /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/result/376-H5/result_alignment/376-H5.rmdup.bam > /hpc/grid/ngsws/molmed/tomn/pfizer_gsko_wgrs/coverage_depth_analysis/CL19.376-H5.txt
+
+
